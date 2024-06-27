@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Phone List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="header">
+        <h1>Phone List</h1>
+    </div>
+    <div class="container">
+        {% if results %}
+            <div class="phone-list">
+                {% for phone in results %}
+                    <div class="phone-item">
+                        <a href="{{ url_for('phone_detail', phone_id=phone.getId) }}">
+                            <h2>{{ phone.getPhoneName }}</h2>
+                            <img src="{{ phone.getPhoto }}" alt="{{ phone.getPhoneName }}" />
+                        </a>
+                        <ul>
+                            {% for key, value in phone.getSpecifications.items() %}
+                                <li><strong>{{ key }}:</strong> {{ value }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="pagination-buttons">
+                <button id="prevBtn">Previous</button>
+                <button id="nextBtn">Next</button>
+            </div>
+        {% else %}
+            <p>No phones found.</p>
+        {% endif %}
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

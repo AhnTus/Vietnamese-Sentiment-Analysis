@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Sentiment Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Vietnamese Sentiment Analysis</h1>
+        {% if user_id %}
+            {% if user_id == 1 %}
+                <form method="POST">
+                    <button type="submit" name="predict">Predict</button>
+                </form>
+                {% if results %}
+                    {% for user in results %}
+                        <p>Hello {{ user.getUserName }},! This is the result of analyzing the results of the comment:</p>
+                        <p>'{{ user.getComment }}'</p>
+                        <p>Sentiment: {{ user.getPredict }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% else %}
+                {% if phone %}
+                    <div class="phone-details">
+                        <img src="{{ phone.getPhoto }}" alt="{{ phone.getPhoneName }}" class="phone-photo">
+                        <div class="phone-info">
+                            <h2>{{ phone.getPhoneName }}</h2>
+                            <ul>
+                                {% for spec, value in phone.getSpecifications.items() %}
+                                    <li>{{ spec }}: {{ value }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                {% endif %}
+                <form method="POST" action="{{ url_for('sentiment_analysis')}} ">
+                    <textarea name="comment_input" placeholder="Enter your comment:" required></textarea><br><br>
+                    <button type="submit" name="submit">Enter comment</button>
+                </form>
+            {% endif %}
+        {% endif %}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <ul class="messages">
+                {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
