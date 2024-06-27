@@ -1,5 +1,5 @@
 # Applying Artificial Neural Networks to Build Text Generation Models as Part of the Generative AI Problem
-### Workflow: Applying artificial neural networks to build models to analyze customer emotions based on comments and evaluation serves for determination business-related trends
+### Workflow: 
 ![workflow](https://github.com/AhnTus/Text-generation/assets/116616796/a5a50f45-c77a-4167-9977-de236263cd8e)
 ### Environment setup
 1. **Install Python libraries:** `numpy`,`tensorflow`,`scikit-learn`, `regex` .
